@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Scheduler (Staff)</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+
+        #sidebar {
+            width: 20%;
+            background-color: #9328FF;
+            color: #fff;
+            border-radius: 0px 40px 40px 0px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        #sidebar img {
+            border-radius: 25px;
+            margin-bottom: 20px;
+        }
+
+        .links {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 60px;
+        }
+
+        .links:hover {
+            color: black;
+        }
+
+        #content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        label {
+            margin: 6px 0;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 7px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .error-message {
+            margin-top: 10px;
+            font-weight: bold;
+            color: red;
+        }
+
+        #codeContainer {
+            margin-top: 8px;
+            display: none;
+        }
+
+        #codeDisplay {
+            font-size: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        #copyButton {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+      
+        
+    </style>
+</head>
+
+<body>
+    <div id="sidebar">
+        <img src="./images/large_Kalasalingam_Academy_of_Research_and_Education_Virudhunagar_aeb7350844_a1649b2e88 (1).png"
+            height="20%" width="90%">
+        <div class="link">
+            <a href="./dashboard.php" class="links">Dashboard </a>
+            <a href="./generateQuiz.php" class="links">Generate Quiz</a>
+            <a href="./edit_scheduled_quizzes.php" class="links">Edit Schedule Quiz</a>
+            <a href="./schedulequiz.php" class="links">Schedule Quiz</a>
+            <a href="#" class="links">View Marks</a>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="card">
+            <h1>Quiz Scheduler (Staff)</h1>
+
+            <form id="quizForm">
+                <label for="title">Quiz Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="quiz_date">Quiz Date:</label>
+                <input type="date" id="quiz_date" name="quiz_date" required>
+                
+                <label for="num_questions">Number of Questions:</label>
+                <input type="number" id="num_questions" name="num_questions" required>
+
+
+                <label for="start_time">Start Time:</label>
+                <input type="time" id="start_time" name="start_time" required>
+
+                <label for="end_time">End Time:</label>
+                <input type="time" id="end_time" name="end_time" required>
+
+                <button type="button" onclick="scheduleQuiz()">Schedule Quiz</button>
+                <div id="quizMessage" class="message"></div>
+            </form>
+
+            <div id="codeContainer">
+                <label for="codeDisplay">Generated Code:</label>
+                <div id="codeDisplay"></div>
+                <span id="copyButton" onclick="copyCodeToClipboard()">📋</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function scheduleQuiz() {
+    const form = document.getElementById('quizForm');
+
+    if (form.checkValidity()) {
+        const currentDate = new Date();
+        const selectedDate = new Date(document.getElementById('quiz_date').value + 'T' + document.getElementById('start_time').value);
+
+        if (selectedDate <= currentDate) {
+            displayMessage('quizMessage', 'Invalid date or time. Please select a future date and time.', false);
+            return;
+        }
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch('backend_schedule_quiz.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            displayMessage('quizMessage', result.message, result.success);
+
+            if (result.success) {
+                const codeContainer = document.getElementById('codeContainer');
+                const codeDisplay = document.getElementById('codeDisplay');
+
+                codeDisplay.textContent = result.code;
+                codeContainer.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    } else {
+        form.reportValidity();
+    }
+}
+
+
+        function displayMessage(elementId, message, success) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = message;
+            element.style.color = success ? 'green' : 'red';
+        }
+
+        function copyCodeToClipboard() {
+            const codeDisplay = document.getElementById('codeDisplay');
+            const codeText = codeDisplay.textContent;
+
+            const textarea = document.createElement('textarea');
+            textarea.value = codeText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            alert('Code copied successfully!');
+        }
+    </script>
+</body>
+
+</html>

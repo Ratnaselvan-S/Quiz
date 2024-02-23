@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, rgba(0, 36, 176, 61%), rgba(219, 0, 158, 54%));
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem auto;
+    width: 70%;
+    height: 85.4%;
+    background-color: white;
+    border-radius: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+
+.Rectangle {
+    height: 100%;
+    width: 32%;
+    background-color: rgba(192, 219, 234, 1);
+    border-radius: 25px;
+    position: absolute;
+    top: 0;
+    left: 68%;
+    z-index: -1;
+}
+
+.student_img {
+    border-radius: 25px;
+    border: 1px solid black;
+    position: absolute;
+    top: 20%;
+    left: 53%;
+}
+
+
+.left_container img {
+    position: absolute;
+    top: 0;
+    left: 70px;
+}
+
+.first {
+    position: absolute;
+    left: 70px;
+    top: 27%;
+    font-size: 22px;
+    font-weight: bold;
+    color: rgba(164, 13, 92, 1);
+    font-family: "outfit";
+}
+
+.second {
+    position: absolute;
+    left: 70px;
+    top: 34%;
+    font-family: "Trade Winds";
+    font-size: 19PX;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    vertical-align: middle;
+}
+.error-box{
+    color: red;
+}
+
+.Email {
+    width: 350px;
+    padding: 6px;
+    background-color: rgba(192, 219, 234, 1);
+    border: none;
+
+
+}
+
+input::placeholder {
+    color: black;
+}
+
+.Forgot {
+    margin-left: 160px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: "poppins";
+    font-size: 14px;
+
+}
+
+.Forgot:hover {
+    color: black;
+
+}
+
+.password {
+    width: 350px;
+    padding: 6px;
+    background-color: rgba(192, 219, 234, 1);
+    border: none;
+}
+.Confirm_password{
+    width: 350px;
+        padding: 6px;
+        background-color: rgba(192, 219, 234, 1);
+        border: none;
+    
+}
+.Email::placeholder {
+    color: grey;
+}
+
+.password::placeholder {
+    color: grey;
+}
+.Confirm_password::placeholder{
+    color: grey;
+}
+
+.form {
+    position: absolute;
+    left: 71px;
+    top: 42%;
+    }
+.Login_page {
+    position: absolute;
+        left: 70%;
+}
+
+        .button_register {
+        position: absolute;
+            left: 30%;
+            padding: 10px;
+            width: 120px;
+            color: white;
+            border-radius: 25px;
+            border: none;
+            background-color: rgba(216, 133, 163, 1);
+        }
+    
+        .button_register:hover {
+            border: 1px solid rgb(0, 0, 0);
+            cursor: pointer;
+        }
+
+        .third {
+            font-family: "commissioner";
+            font-size: 18px;
+            font-weight: 100;
+            margin-left: 42px;
+        }

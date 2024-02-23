@@ -1,0 +1,653 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, rgba(0, 36, 176, 61%), rgba(219, 0, 158, 54%));
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem auto;
+    width: 70%;
+    height: 85.4%;
+    background-color: white;
+    border-radius: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+/* .right_container{
+    position: absolute;
+    left: 50%;
+    transform:translate(-50%);
+} */
+.Rectangle {
+    height: 100%;
+    width: 32%;
+    background-color: rgba(192, 219, 234, 1);
+    border-radius: 25px;
+    position: absolute;
+    top: 0;
+    left: 68%;
+    z-index: -1;
+}
+
+.student_img {
+    border-radius: 25px;
+    border: 1px solid black;
+    position: absolute;
+    top: 20%;
+    left: 53%;
+}
+
+/* Add these styles */
+.error-box {
+    color: red;
+    margin-top: 1px;
+    display: none;
+    font-size: 17;
+}
+
+.left_container img {
+    position: absolute;
+    top: 0;
+    left: 70px;
+}
+
+.first {
+    position: absolute;
+    left: 70px;
+    top: 27%;
+    font-size: 22px;
+    font-weight: bold;
+    color: rgba(164, 13, 92, 1);
+    font-family: "outfit";
+}
+
+.second {
+    position: absolute;
+    left: 70px;
+    top: 34%;
+    font-family: "Trade Winds";
+    font-size: 19PX;
+    font-weight: lighter;
+    /* font-style: italic; */
+    letter-spacing: 2px;
+    vertical-align: middle;
+}
+
+
+.Email {
+    width: 99%;
+    padding: 6px;
+    background-color: rgba(192, 219, 234, 1);
+    border: none;
+
+
+}
+
+input::placeholder {
+    color: black;
+}
+
+.Forgot {
+    margin-left: 160px;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: "poppins";
+    font-size: 14px;
+
+}
+
+.Forgot:hover {
+    color: black;
+
+}
+
+.password {
+    width: 99%;
+    padding: 6px;
+    background-color: rgba(192, 219, 234, 1);
+    border: none;
+}
+
+.Login_page {
+    position: absolute;
+    left: 73%;
+}
+
+.form {
+    position: absolute;
+    left: 71px;
+    top: 42%;
+
+}
+
+.Email::placeholder {
+    color: grey;
+}
+
+.password::placeholder {
+    color: grey;
+}
+
+.button_login {
+    position: absolute;
+    left: 35%;
+    padding: 10px;
+    width: 120px;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    background-color: rgba(216, 133, 163, 1);
+}
+
+.button_login:hover {
+    border: 1px solid rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.third {
+    font-family: "commissioner";
+    font-size: 18px;
+    font-weight: 100;
+    margin-left: 42px;
+}
+
+@media only screen and (max-width:1025px) {
+    .container {
+        width: 70%;
+        height: 80%;
+    }
+
+    .student_img {
+        width: 37%;
+        height: 60%;
+    }
+
+    .error-box {
+        font-size: 12;
+    }
+
+    .left_container img {
+        left: 40px;
+        width: 37%;
+        height: 30%;
+    }
+
+    .first {
+
+        left: 50px;
+        top: 27%;
+        font-size: 17px;
+    }
+
+    .second {
+        left: 50px;
+        top: 34%;
+        font-size: 18PX;
+        /* font-style: italic; */
+    }
+
+    .Email {
+        width: 94%;
+        padding: 6px;
+
+
+    }
+
+    .form {
+        left: 50px;
+        top: 42%;
+    }
+
+    .password {
+        width: 94%;
+        padding: 6px;
+    }
+
+    .Forgot {
+        margin-left: 60px;
+        font-size: 10px;
+
+    }
+
+    .button_login {
+        left: 29%;
+        padding: 10px;
+        width: 120px;
+    }
+
+    .Login_page {
+        position: absolute;
+        left: 72%;
+    }
+
+}
+
+@media only screen and (max-width:950px) {
+    .student_img {
+        width: 35%;
+        height: 50%;
+        top: 25%;
+    }
+
+    .container {
+        width: 70%;
+        height: 80%;
+    }
+
+    .first {
+
+        left: 50px;
+        top: 27%;
+        font-size: 15px;
+    }
+
+    .second {
+        left: 50px;
+        top: 34%;
+        font-size: 18PX;
+    }
+
+    .Email {
+        width: 80%;
+        padding: 6px;
+
+
+    }
+
+    .form {
+        left: 50px;
+        top: 42%;
+    }
+
+    .password {
+        width: 80%;
+        padding: 6px;
+    }
+
+    .Forgot {
+        margin-left: 60px;
+        font-size: 10px;
+
+    }
+
+    .button_login {
+        left: 20%;
+        padding: 10px;
+        width: 120px;
+    }
+
+    .Login_page {
+        position: absolute;
+        left: 60%;
+    }
+
+}
+
+
+@media only screen and (max-width:850px) {
+    .student_img {
+        width: 30%;
+        height: 45%;
+        top: 25%;
+    }
+
+    .container {
+        width: 80%;
+        height: 80%;
+    }
+
+    .first {
+
+        left: 50px;
+        top: 27%;
+        font-size: 15px;
+    }
+
+    .second {
+        left: 50px;
+        top: 34%;
+        font-size: 18PX;
+    }
+
+    .Email {
+        width: 80%;
+        padding: 6px;
+        border: none;
+
+
+    }
+
+    .form {
+        left: 50px;
+        top: 42%;
+    }
+
+    .password {
+        width: 80%;
+        padding: 6px;
+        border: none;
+    }
+
+    .Forgot {
+        margin-left: 60px;
+        font-size: 10px;
+
+    }
+
+    .button_login {
+        left: 20%;
+        padding: 10px;
+        width: 120px;
+        border-radius: 25px;
+    }
+
+    .Login_page {
+        position: absolute;
+        left: 60%;
+    }
+
+}
+
+@media only screen and (max-width:750px) {
+    .student_img {
+        width: 30%;
+        height: 40%;
+        top: 30%;
+        left: 60%;
+    }
+
+    .container {
+        width: 80%;
+        height: 80%;
+    }
+
+    .first {
+
+        left: 50px;
+        top: 27%;
+        font-size: 15px;
+    }
+
+    .second {
+        left: 50px;
+        top: 34%;
+        font-size: 18PX;
+    }
+
+    .Email {
+        width: 80%;
+        padding: 6px;
+        border: none;
+
+
+    }
+
+    .form {
+        left: 50px;
+        top: 42%;
+    }
+
+    .password {
+        width: 80%;
+        padding: 6px;
+    }
+
+    .Forgot {
+        margin-left: 74px;
+        font-size: 12px;
+
+    }
+
+    .button_login {
+        left: 20%;
+        padding: 10px;
+        width: 120px;
+        border-radius: 25px;
+    }
+
+    .Login_page {
+        position: absolute;
+        left: 60%;
+    }
+
+    .left_container img {
+        position: absolute;
+        top: 0;
+        width: 250px;
+        height: 30%;
+    }
+
+}
+
+@media only screen and (max-width:650px) {
+    .student_img {
+        display: none;
+    }
+
+    .Rectangle {
+        display: none;
+    }
+
+    .container {
+        width: 80%;
+        height: 80%;
+    }
+
+    .first {
+
+        left: 90px;
+        top: 27%;
+        font-size: 15px;
+    }
+
+    .second {
+        left: 90px;
+        top: 34%;
+        font-size: 18PX;
+        font-weight: lighter;
+        /* font-style: italic; */
+    }
+
+    .Email {
+        width: 100%;
+        padding: 6px;
+        border: none;
+
+
+    }
+
+    .form {
+        position: absolute;
+        left: 90px;
+        top: 42%;
+    }
+
+    .password {
+        width: 100%;
+        padding: 6px;
+    }
+
+    .Forgot {
+        margin-left: 123px;
+        font-size: 13px;
+
+    }
+
+    .button_login {
+        left: 20%;
+        padding: 10px;
+        width: 120px;
+        border-radius: 25px;
+    }
+
+    .Login_page {
+        left: 70%;
+    }
+
+    .left_container img {
+        top: 0;
+        left: 110px;
+        width: 250px;
+        height: 30%;
+    }
+
+    .third {
+        margin-left: 20px;
+
+    }
+
+}
+
+@media only screen and (max-width:560px) {
+
+    .container {
+        width: 80%;
+        height: 80%;
+
+    }
+
+    .first {
+
+        left: 70px;
+        top: 27%;
+        font-size: 14px;
+    }
+
+    .second {
+        left: 70px;
+        top: 34%;
+        font-size: 13PX;
+        /* font-style: italic; */
+    }
+
+    .Email {
+        width: 100%;
+        padding: 6px;
+
+
+    }
+
+    .form {
+        position: absolute;
+        left: 70px;
+        top: 42%;
+    }
+
+    .password {
+        width: 100%;
+        padding: 6px;
+    }
+
+    .Forgot {
+        margin-left: 90px;
+        font-size: 10px;
+
+    }
+
+    .button_login {
+        left: 20%;
+        padding: 10px;
+        width: 100px;
+    }
+
+    .Login_page {
+        left: 64%;
+        font-size: 14px;
+    }
+
+    .left_container img {
+        top: 0;
+        left: 70px;
+        width: 230px;
+        height: 31%;
+    }
+
+    .third {
+        margin-left: 10px;
+        font-size: 15px;
+
+    }
+
+
+}
+
+@media only screen and (max-width:430px) {
+
+    .container {
+        width: 80%;
+        height: 80%;
+
+    }
+
+    .first {
+        left: 40px;
+        top: 27%;
+        font-size: 13px;
+    }
+
+    .second {
+        left: 40px;
+        top: 34%;
+        font-size: 13PX;
+        /* font-style: italic; */
+    }
+
+    .Email {
+        width: 100%;
+        padding: 6px;
+
+
+    }
+
+    .form {
+        left: 40px;
+        top: 42%;
+    }
+
+    .password {
+        width: 100%;
+        padding: 6px;
+    }
+
+    .Forgot {
+        margin-left: 90px;
+        font-size: 10px;
+
+    }
+
+    .button_login {
+        left: 25%;
+        padding: 10px;
+        width: 100px;
+    }
+
+    .Login_page {
+        left: 64%;
+        font-size: 14px;
+    }
+
+    .left_container img {
+        top: 0;
+        left: 30px;
+        width: 250px;
+        height: 30%;
+    }
+
+    .third {
+        margin-left: 10px;
+        font-size: 15px;
+
+    }
+
+
+}

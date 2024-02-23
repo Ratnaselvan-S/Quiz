@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=League Spartan' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://fonts.googleapis.com/css?family=Commissioner' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Trade Winds' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Outfit' rel='stylesheet'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.0.3/mammoth.browser.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Quiz maker</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left_container">
+            <img src="./images/large_Kalasalingam_Academy_of_Research_and_Education_Virudhunagar_aeb7350844_a1649b2e88 (1).png"
+                alt="Kalasalingam" width="37%" height="30%">
+            <h3 class="first">STUDENT ASSESSMENT PORTAL</h3><br>
+            <h3 class="second"><span style="font-style: italic;">WELCOME BACK</span><span
+                    style="font-size: 30px;vertical-align: middle;letter-spacing: 0;">&nbsp&nbsp!!!</span></h3><br><br>
+            <form method="post" action="student_login.php" onsubmit="return validateForm()">
+                <span class="form"><label>Email</label><br><br>
+                    <input type="email" name="Email" placeholder="login@klu.ac.in" class="Email" autocomplete="off"
+                        required><br><br>
+                    <span class="Password_container"><label>Password</label><span><a href="./student-forgot-password.php"
+                                class="Forgot">Forgot
+                                password ?</a></span></span><br><br>
+                    <input type="password" name="Password" placeholder="************" class="password"
+                        autocomplete="off" required><br><br>
+                    <div id="error-box" class="error-box"></div>
+                    <span class="Login_page">Teacher &nbsp&nbsp&nbsp&nbsp&nbspLogin?&nbsp<a href="./login.html">Login</a></span>
+                    <button type="submit" class="button_login">Login &nbsp&nbsp&nbsp&nbsp
+                        &#8640</button><br><br><br><br>
+                    <h3 class="third">DEVELOPED BY SDT-KARE OSS</h3>
+                </span>
+            </form>
+        </div>
+        <div class="right_container">
+            <div class="Rectangle"></div>
+            <img src="./images/32266790_5njf_tmba_220905.jpg" alt="student image" width="35%" height="68%" class="student_img">
+
+        </div>
+    </div>
+    <script>
+        function validateForm() {
+            var email = document.getElementsByName("Email")[0].value;
+            var password = document.getElementsByName("Password")[0].value;
+            var errorBox = document.getElementById("error-box");
+
+            if (email.trim() === "" || password.trim() === "") {
+                errorBox.innerHTML = "Invalid input. Please fill all fields.";
+                errorBox.style.display = "block";
+                return false; 
+            } else {
+                errorBox.innerHTML = "";
+                errorBox.style.display = "none";
+                return true; 
+            }
+        }
+        
+        function hideError() {
+            document.getElementById("error-box").style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>

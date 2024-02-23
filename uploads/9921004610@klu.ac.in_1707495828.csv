@@ -1,0 +1,7 @@
+QuestionNumber,Question,type,options,CorrectOption1
+1,Which programming languages are interpreted?,Multiple,"Python,c++,java,javascript","Python,javascript"
+2,What are the primary colors?,Multiple,"Red,blue,yellow,green","Red,blue,green"
+3,Are elephants mammals?,TrueFalse,"TRUE,FALSE",TRUE
+4,Is the sky pink?,TrueFalse,"TRUE,FALSE",FALSE
+5,Which is the largest mammal?,Single,"Elephant,blue whale,giraffee,lion",blue whale
+6,What is the capital of France?,Single,"Paris,berlin,madrid,rome",Paris

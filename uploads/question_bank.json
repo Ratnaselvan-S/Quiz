@@ -1,0 +1,65 @@
+{
+    "title": "GK Quiz ",
+    "questions": [
+        {
+            "text": "1. What is the capital of France?",
+            "options": []
+        },
+        {
+            "text": "A. Paris",
+            "options": []
+        },
+        {
+            "text": "B. London",
+            "options": []
+        },
+        {
+            "text": "C. Berlin",
+            "options": []
+        },
+        {
+            "text": "D. Rome",
+            "options": []
+        },
+        {
+            "text": "2. Which planet is known as the Red Planet?",
+            "options": []
+        },
+        {
+            "text": "A. Earth",
+            "options": []
+        },
+        {
+            "text": "B. Mars",
+            "options": []
+        },
+        {
+            "text": "C. Venus",
+            "options": []
+        },
+        {
+            "text": "D. Jupiter",
+            "options": []
+        },
+        {
+            "text": "3. Who is the author of &quot;To Kill a Mockingbird&quot;?",
+            "options": []
+        },
+        {
+            "text": "A. J.K. Rowling",
+            "options": []
+        },
+        {
+            "text": "B. George Orwell",
+            "options": []
+        },
+        {
+            "text": "C. Harper Lee",
+            "options": []
+        },
+        {
+            "text": "D. Ernest Hemingway",
+            "options": []
+        }
+    ]
+}
