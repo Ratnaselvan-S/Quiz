@@ -2,7 +2,7 @@
 session_start();
     // Database connection parameters
 
-    $host = "alphadevsx.com";
+    $host = "https://kare-quiz.alphadevsx.com";
     $dbname = "u475858870_quiz";
     $username = "u475858870_root";
     $dbPassword = "Kalasalingam@339";

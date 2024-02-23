@@ -3,7 +3,7 @@ $token = $_GET["token"];
 
 $token_hash = hash("sha256", $token);
 
-                                                    $host = "alphadevsx.com";
+                                                    $host = "https://kare-quiz.alphadevsx.com";
                                                     $dbname = "u475858870_quiz";
                                                     $username = "u475858870_root";
                                                     $dbPassword = "Kalasalingam@339";

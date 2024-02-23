@@ -15,7 +15,7 @@ if (isset($_SESSION['user_email'])) {
     // Fetch user information from student_info table
     try {
 
-        $host = "alphadevsx.com";
+        $host = "https://kare-quiz.alphadevsx.com";
         $dbname = "u475858870_quiz";
         $username = "u475858870_root";
         $dbPassword = "Kalasalingam@339";
