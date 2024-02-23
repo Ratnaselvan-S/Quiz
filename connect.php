@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $conn = new mysqli('kare-quiz.alphadevsx.com', 'u475858870_root', 'Kalasalingam@339
+    $conn = new mysqli('https://kare-quiz.alphadevsx.com', 'u475858870_root', 'Kalasalingam@339
 ', 'u475858870_quiz');
 
     if ($conn->connect_error) {
