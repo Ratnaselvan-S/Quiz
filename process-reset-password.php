@@ -2,7 +2,7 @@
 $token = $_POST["token"];
 $password = $_POST["password"];
 
-$host = "https://kare-quiz.alphadevsx.com";
+$host = "localhost";
 $dbname = "u475858870_quiz";
 $username = "u475858870_root";
 $dbPassword = "Kalasalingam@339";

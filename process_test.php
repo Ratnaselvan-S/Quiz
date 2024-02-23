@@ -5,7 +5,7 @@ if (isset($_POST['quizData'])) {
     $quizData = json_decode($_POST['quizData'], true);
 
     try {
-        $host = "https://kare-quiz.alphadevsx.com";
+        $host = "localhost";
         $dbname = "u475858870_quiz";
         $username = "u475858870_root";
         $dbPassword = "Kalasalingam@339";

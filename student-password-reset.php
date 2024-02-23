@@ -7,7 +7,7 @@ $token_hash = hash("sha256", $token);
 $expiry = date("Y-m-d H:i:s", time() + 60 * 30);
 
 
-$host = "https://kare-quiz.alphadevsx.com";
+$host = "localhost";
 $dbname = "u475858870_quiz";
 $username = "u475858870_root";
 $dbPassword = "Kalasalingam@339";

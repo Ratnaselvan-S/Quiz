@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $activation_token = bin2hex(random_bytes(16));
     $activation_token_hash = hash("sha256", $activation_token);
 
-    $host = "https://kare-quiz.alphadevsx.com";
+    $host = "localhost";
     $dbname = "u475858870_quiz";
     $username = "u475858870_root";
     $dbPassword = "Kalasalingam@339";

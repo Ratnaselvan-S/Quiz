@@ -10,8 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['file_path'])) {
     $user_email = $_SESSION['user_email'];
     $file_path = $_POST['file_path'];
 
-    $conn = new mysqli('https://kare-quiz.alphadevsx.com', 'u475858870_root', 'Kalasalingam@339
-', 'u475858870_quiz');
+    $conn = new mysqli('localhost', 'u475858870_root', 'Kalasalingam@339', 'u475858870_quiz');
     if ($conn->connect_error) {
         die('Connection Failed: ' . $conn->connect_error);
     }
