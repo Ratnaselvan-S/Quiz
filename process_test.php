@@ -77,7 +77,10 @@ if (isset($_POST['quizData'])) {
                     $_SESSION['quiz_submitted'] = true;
 
                     // Redirect the user to another page after successful quiz attendance recording
-                    header("Location: student_dashboard.php");
+                    echo '<script>alert("Quiz submitted successfully!");</script>';
+
+                    // Redirect the user to dashboard page after successful quiz attendance recording
+                    echo '<script>window.location.href = "student_dashboard.php";</script>';
                     exit; // Make sure to exit after the redirect
                 } else {
                     echo "Error: No quiz data received.";

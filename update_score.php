@@ -51,7 +51,10 @@ if (isset($_SESSION['user_email'])) {
             $_SESSION['quiz_submitted'] = true;
 
             // Redirect to student dashboard after successful recording
-            header("Location: student_dashboard.php");
+            echo '<script>alert("Your score on the quiz is zero because you cheated.");</script>';
+
+            // Redirect the user to dashboard page after successful quiz attendance recording
+            echo '<script>window.location.href = "student_dashboard.php";</script>';
             exit; // Make sure to exit after the redirect
         } else {
             echo "Error: User information not found.";

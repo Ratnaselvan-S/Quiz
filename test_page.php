@@ -342,11 +342,11 @@
         document.addEventListener("visibilitychange", function() {
             if (document.visibilityState === 'hidden') {
                 tabSwitchCount++;
-                if (tabSwitchCount === 100) {
+                if (tabSwitchCount === 3) {
                     // If the user switches tabs three times, update the score in the database with zero marks
                     window.location.href = "update_score.php?code=<?php echo $_GET['code']; ?>&reset=1";
                 } else if (tabSwitchCount > 0) {
-                    alert("Warning: You've switched tabs. Please return to complete the quiz.");
+                    alert("Warning: You've switched tabs " + tabSwitchCount + " times. If you switch three times, your mark will be 0.");
                 }
             }
         });
