@@ -6,9 +6,9 @@ if (isset($_POST['quizData'])) {
 
     try {
         $host = "localhost";
-        $dbname = "u475858870_quiz";
-        $username = "u475858870_root";
-        $dbPassword = "Kalasalingam@339";
+        $dbname = "quiz";
+        $username = "root";
+        $dbPassword = "";
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -41,7 +41,7 @@ if (isset($_POST['quizData'])) {
                 $stmt = $pdo->prepare("INSERT INTO quiz_attendance (email, name, register, section, stream, code, title, marks) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
                 $totalQuestions = count($quizData);
-                $totalMarks = 0;
+                $totalMarks = floatval(0);
 
                 foreach ($quizData as $questionIndex => $questionData) {
                     $userAnswer = isset($_POST['question_' . ($questionIndex + 1)]) ? $_POST['question_' . ($questionIndex + 1)] : null;
@@ -49,11 +49,13 @@ if (isset($_POST['quizData'])) {
 
                     if (strtoupper($questionData['type']) == 'MULTIPLE') {
                         $totalCorrectOptions = count(array_filter(explode(",", $correctAnswer)));
-                        $selectedCorrectOptions = count(array_intersect($userAnswer, explode(",", $correctAnswer)));
-                        if ($selectedCorrectOptions == $totalCorrectOptions) {
-                            $totalMarks += 1;
-                        } else {
-                            $totalMarks += $selectedCorrectOptions / $totalCorrectOptions;
+                        if ($userAnswer !== null) { // Check if userAnswer is not null
+                            $selectedCorrectOptions = count(array_intersect((array)$userAnswer, explode(",", $correctAnswer)));
+                            if ($selectedCorrectOptions == $totalCorrectOptions) {
+                                $totalMarks += 1;
+                            } else {
+                                $totalMarks += intval($selectedCorrectOptions / $totalCorrectOptions);
+                            }
                         }
                     } else {
                         if ($userAnswer === $correctAnswer) {
@@ -63,8 +65,7 @@ if (isset($_POST['quizData'])) {
                 }
 
                 if ($totalQuestions > 0) {
-                    $userScore = ($totalMarks / $totalQuestions) * 100;
-
+                    $userScore = intval(($totalMarks / $totalQuestions) * 100);
                     // Execute the SQL query to insert quiz attendance
                     $stmt->execute([$email, $name, $registerId, $section, $stream, $code, $title, $userScore]);
 
