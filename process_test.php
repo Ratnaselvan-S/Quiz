@@ -1,13 +1,6 @@
 <?php
 session_start(); // Start the session
 
-// Check if the quiz has already been submitted
-if (isset($_SESSION['quiz_submitted']) && $_SESSION['quiz_submitted']) {
-    // Redirect to the dashboard or any other page
-    header("Location: student_dashboard.php");
-    exit; // Make sure to exit after the redirect
-}
-
 if (isset($_POST['quizData'])) {
     $quizData = json_decode($_POST['quizData'], true);
 
@@ -23,13 +16,6 @@ if (isset($_POST['quizData'])) {
         // Fetch user email from session
         if (isset($_SESSION['user_email'])) {
             $email = $_SESSION['user_email'];
-
-            // Check if the quiz has already been submitted by the user
-            if (quizAlreadySubmitted($pdo, $email)) {
-                // Redirect to the dashboard or any other page
-                header("Location: student_dashboard.php");
-                exit; // Make sure to exit after the redirect
-            }
 
             // Fetch user information from student_info table
             $stmt = $pdo->prepare("SELECT register, name, section, stream FROM student_info WHERE email = ?");
@@ -55,21 +41,19 @@ if (isset($_POST['quizData'])) {
                 $stmt = $pdo->prepare("INSERT INTO quiz_attendance (email, name, register, section, stream, code, title, marks) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
                 $totalQuestions = count($quizData);
-                $totalMarks = floatval(0);
+                $totalMarks = 0;
 
                 foreach ($quizData as $questionIndex => $questionData) {
-                    $userAnswer = isset($POST['question' . ($questionIndex + 1)]) ? $POST['question' . ($questionIndex + 1)] : null;
+                    $userAnswer = isset($_POST['question_' . ($questionIndex + 1)]) ? $_POST['question_' . ($questionIndex + 1)] : null;
                     $correctAnswer = $questionData['CorrectOption1'];
 
                     if (strtoupper($questionData['type']) == 'MULTIPLE') {
                         $totalCorrectOptions = count(array_filter(explode(",", $correctAnswer)));
-                        if ($userAnswer !== null) { // Check if userAnswer is not null
-                            $selectedCorrectOptions = count(array_intersect((array)$userAnswer, explode(",", $correctAnswer)));
-                            if ($selectedCorrectOptions == $totalCorrectOptions) {
-                                $totalMarks += 1;
-                            } else {
-                                $totalMarks += intval($selectedCorrectOptions / $totalCorrectOptions);
-                            }
+                        $selectedCorrectOptions = count(array_intersect($userAnswer, explode(",", $correctAnswer)));
+                        if ($selectedCorrectOptions == $totalCorrectOptions) {
+                            $totalMarks += 1;
+                        } else {
+                            $totalMarks += $selectedCorrectOptions / $totalCorrectOptions;
                         }
                     } else {
                         if ($userAnswer === $correctAnswer) {
@@ -79,7 +63,8 @@ if (isset($_POST['quizData'])) {
                 }
 
                 if ($totalQuestions > 0) {
-                    $userScore = intval(($totalMarks / $totalQuestions) * 100);
+                    $userScore = ($totalMarks / $totalQuestions) * 100;
+
                     // Execute the SQL query to insert quiz attendance
                     $stmt->execute([$email, $name, $registerId, $section, $stream, $code, $title, $userScore]);
 
@@ -103,13 +88,4 @@ if (isset($_POST['quizData'])) {
     }
 } else {
     echo 'Error: No quiz data received.';
-}
-
-// Function to check if the quiz has already been submitted by the user
-function quizAlreadySubmitted($pdo, $email)
-{
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM quiz_attendance WHERE email = ?");
-    $stmt->execute([$email]);
-    $rowCount = $stmt->fetchColumn();
-    return $rowCount > 0;
 }

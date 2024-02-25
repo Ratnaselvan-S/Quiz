@@ -256,7 +256,7 @@
                     echo '<div class="button-container">';
                     echo '<button id="prev-button" type="button" class="btn btn-secondary left" onclick="showPrevQuestion()" style="display: none;">Previous</button>';
                     echo '<button id="next-button" type="button" class="btn btn-primary right" onclick="showNextQuestion()">Next</button>';
-                    echo '<input type="submit" id="submit-button" value="Submit" class="btn btn-primary right" style="display: none;">';
+                    echo '<input type="submit" id="submit-button" value="Submit" class="btn btn-primary right" onclick="this.disabled = true" style="display: none;">';
                     echo '</div>';
                     echo '</form>';
                 } else {
