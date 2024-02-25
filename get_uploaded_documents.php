@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_email'])) {
     exit();
 }
 
-$conn = new mysqli('localhost', 'u475858870_root', 'Kalasalingam@339', 'u475858870_quiz');
+$conn = new mysqli('localhost', 'root', '', 'quiz');
 if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);
 }

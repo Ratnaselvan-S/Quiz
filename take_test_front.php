@@ -50,11 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $error = "";
 
     try {
-
         $host = "localhost";
-        $dbname = "u475858870_quiz";
-        $username = "u475858870_root";
-        $dbPassword = "Kalasalingam@339";
+        $dbname = "quiz";
+        $username = "root";
+        $dbPassword = "";
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -133,6 +132,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-top: 10px;
         }
     </style>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
 </head>
 
 <body>
@@ -149,7 +155,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <script>
-        
         let tabOpened = false;
 
         // Check if any other tab is opened in the same browser

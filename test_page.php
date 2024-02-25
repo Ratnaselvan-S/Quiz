@@ -131,8 +131,7 @@
     <div class="overlay"></div>
     <div id="quiz-container">
         <?php
-        // Start the session to access session variables
-        session_start();
+        session_start(); // Start the session at the beginning of the script
 
         // Check if the quiz has already been submitted
         if (isset($_SESSION['quiz_submitted']) && $_SESSION['quiz_submitted']) {
@@ -144,13 +143,13 @@
         // Check if the code parameter exists in the URL
         if (isset($_GET['code'])) {
             $code = $_GET['code'];
+            $userEmail = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ""; // Define $userEmail properly
 
             try {
-
                 $host = "localhost";
-                $dbname = "u475858870_quiz";
-                $username = "u475858870_root";
-                $dbPassword = "Kalasalingam@339";
+                $dbname = "quiz";
+                $username = "root";
+                $dbPassword = "";
 
                 // Connect to the database
                 $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
@@ -165,10 +164,14 @@
                 date_default_timezone_set('Asia/Kolkata');
 
                 if ($quizData) {
+
+                    // Rest of the code...
+
+                    // Rest of the code...
+
                     $quizFilePath = $quizData['file_path'];
                     $numOfQuestions = $quizData['number_of_questions'];
                     $endTime = strtotime($quizData['end_time']);
-
 
                     // Check if questions are already selected for this user session
                     if (!isset($_SESSION['selected_questions'][$code])) {
@@ -227,9 +230,21 @@
                         foreach ($options as $optionIndex => $option) {
                             echo '<div class="form-check">';
                             if (strtoupper($questionData['type']) == 'MULTIPLE') {
-                                echo '<input type="checkbox" class="form-check-input unselectable" name="question_' . ($questionIndex + 1) . '[]" value="' . htmlspecialchars($option) . '">';
+                                // For multiple choice questions (checkboxes)
+                                echo '<input type="checkbox" class="form-check-input" name="question_' . ($questionIndex + 1) . '[]" value="' . htmlspecialchars($option) . '"';
+                                // Check if the option was previously selected and add the "checked" attribute
+                                if (isset($selectedOptions['question_' . ($questionIndex + 1)]) && in_array($option, $selectedOptions['question_' . ($questionIndex + 1)])) {
+                                    echo ' checked';
+                                }
+                                echo '>';
                             } elseif (strtoupper($questionData['type']) == 'SINGLE' || strtoupper($questionData['type']) == 'TRUEFALSE') {
-                                echo '<input type="radio" class="form-check-input unselectable" name="question_' . ($questionIndex + 1) . '" value="' . htmlspecialchars($option) . '">';
+                                // For single choice questions (radio buttons) or true/false questions
+                                echo '<input type="radio" class="form-check-input" name="question_' . ($questionIndex + 1) . '" value="' . htmlspecialchars($option) . '"';
+                                // Check if the option was previously selected and add the "checked" attribute
+                                if (isset($selectedOptions['question_' . ($questionIndex + 1)]) && $selectedOptions['question_' . ($questionIndex + 1)] == $option) {
+                                    echo ' checked';
+                                }
+                                echo '>';
                             }
                             echo '<label class="form-check-label unselectable">' . htmlspecialchars($option) . '</label>';
                             echo '</div>';
@@ -253,10 +268,64 @@
         } else {
             echo '<p>No code provided.</p>';
         }
+
+        // Retrieve selected options from session if available
+        $userEmail = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ""; // Define $userEmail properly
+        if (isset($_SESSION['selected_options'][$userEmail][$code])) {
+            $selectedOptions = $_SESSION['selected_options'][$userEmail][$code];
+        } else {
+            $selectedOptions = [];
+        }
+
         ?>
+
     </div>
     <div id="clock"></div>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userEmail = '<?php echo isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ''; ?>';
+            const code = '<?php echo $_GET['code']; ?>';
+            const storedOptions = sessionStorage.getItem('selectedOptions_' + userEmail + '_' + code);
+            if (storedOptions) {
+                const selectedOptions = JSON.parse(storedOptions);
+                restoreSelectedOptions(selectedOptions);
+            }
+        });
+
+        function saveSelectedOptions() {
+            const userEmail = '<?php echo isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ''; ?>';
+            const code = '<?php echo $_GET['code']; ?>';
+            const questions = document.querySelectorAll('.question-card');
+            const selectedOptions = {};
+            questions.forEach((question, index) => {
+                const inputs = question.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+                selectedOptions[index] = [];
+                inputs.forEach(input => {
+                    if (input.checked) {
+                        selectedOptions[index].push(input.value);
+                    }
+                });
+            });
+            sessionStorage.setItem('selectedOptions_' + userEmail + '_' + code, JSON.stringify(selectedOptions));
+        }
+
+        function restoreSelectedOptions(selectedOptions) {
+            const questions = document.querySelectorAll('.question-card');
+            questions.forEach((question, index) => {
+                const inputs = question.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+                inputs.forEach(input => {
+                    if (selectedOptions[index].includes(input.value)) {
+                        input.checked = true;
+                    }
+                });
+            });
+        }
+
+        window.addEventListener('beforeunload', () => {
+            saveSelectedOptions();
+        });
+
+
         let currentQuestionIndex = 0;
         const totalQuestions = <?php echo count($selectedQuestions); ?>;
         let tabSwitchCount = 0;
@@ -273,7 +342,7 @@
         document.addEventListener("visibilitychange", function() {
             if (document.visibilityState === 'hidden') {
                 tabSwitchCount++;
-                if (tabSwitchCount === 3) {
+                if (tabSwitchCount === 100) {
                     // If the user switches tabs three times, update the score in the database with zero marks
                     window.location.href = "update_score.php?code=<?php echo $_GET['code']; ?>&reset=1";
                 } else if (tabSwitchCount > 0) {
@@ -314,7 +383,11 @@
                 alert("Please answer all questions before submitting.");
                 return false;
             } else {
-                return true;
+                // Delete selected options from session storage
+                const userEmail = '<?php echo isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ''; ?>';
+                const code = '<?php echo $_GET['code']; ?>';
+                sessionStorage.removeItem('selectedOptions_' + userEmail + '_' + code);
+                return true; // Allow the form submission
             }
         }
 

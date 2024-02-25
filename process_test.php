@@ -6,9 +6,9 @@ if (isset($_POST['quizData'])) {
 
     try {
         $host = "localhost";
-        $dbname = "u475858870_quiz";
-        $username = "u475858870_root";
-        $dbPassword = "Kalasalingam@339";
+        $dbname = "quiz";
+        $username = "root";
+        $dbPassword = "";
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

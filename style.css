@@ -651,3 +651,163 @@ input::placeholder {
 
 
 }
+
+@media only screen and (max-width:385px) {
+
+    .container {
+        width: 80%;
+        height: 80%;
+
+    }
+
+    .first {
+        left: 32px;
+        top: 27%;
+        font-size: 10px;
+    }
+
+    .second {
+        left: 32px;
+        top: 34%;
+        font-size: 10PX;
+        /* font-style: italic; */
+    }
+
+    .Email {
+        width: 100%;
+        padding: 6px;
+
+
+    }
+
+    .form {
+        left: 32px;
+        top: 42%;
+    }
+
+
+
+    .password {
+        width: 100%;
+        padding: 6px;
+    }
+
+    .Forgot {
+        margin-left: 60px;
+        font-size: 10px;
+
+    }
+
+    .button_login {
+        left: 15%;
+        padding: 10px;
+        width: 100px;
+    }
+
+    .Login_page {
+        left: 65%;
+        font-size: 10px;
+        top: 68%;
+    }
+
+    .left_container img {
+        top: 0;
+        left: 32px;
+        width: 250px;
+        height: 30%;
+    }
+
+    .third {
+        margin-left: 45px;
+        font-size: 10px;
+
+    }
+
+    .left_container img {
+        left: 40px;
+        width: 70%;
+        height: 30%;
+    }
+
+
+}
+
+@media only screen and (max-width:320px) {
+
+    .container {
+        width: 80%;
+        height: 80%;
+
+    }
+
+    .first {
+        left: 32px;
+        top: 27%;
+        font-size: 9px;
+    }
+
+    .second {
+        left: 32px;
+        top: 34%;
+        font-size: 9PX;
+        /* font-style: italic; */
+    }
+
+    .Email {
+        width: 90%;
+        padding: 6px;
+
+
+    }
+
+    .form {
+        left: 32px;
+        top: 42%;
+    }
+
+
+
+    .password {
+        width: 90%;
+        padding: 6px;
+    }
+
+    .Forgot {
+        margin-left: 54px;
+        font-size: 10px;
+
+    }
+
+    .button_login {
+        left: 15%;
+        padding: 10px;
+        width: 100px;
+    }
+
+    .Login_page {
+        left: 65%;
+        font-size: 10px;
+        top: 68%;
+    }
+
+    .left_container img {
+        top: 0;
+        left: 32px;
+        width: 250px;
+        height: 30%;
+    }
+
+    .third {
+        margin-left: 20px;
+        font-size: 10px;
+
+    }
+
+    .left_container img {
+        left: 40px;
+        width: 70%;
+        height: 30%;
+    }
+
+
+}

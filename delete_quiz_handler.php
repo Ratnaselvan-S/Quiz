@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$conn = new mysqli('localhost', 'u475858870_root', 'Kalasalingam@339', 'u475858870_quiz');
+$conn = new mysqli('localhost', 'root', '', 'quiz');
 if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);
 }
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['user_email']) && isset(
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        header('Location: edit_scheduled_quizzes.php');
+        header('Location: edit_scheduled_quizzes.php'); 
         exit;
     } else {
         echo 'Error deleting quiz';

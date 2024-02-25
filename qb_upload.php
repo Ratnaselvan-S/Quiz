@@ -28,7 +28,7 @@ if (isset($_FILES['quiz_file']) && $_FILES['quiz_file']['error'] == UPLOAD_ERR_O
         if (move_uploaded_file($_FILES['quiz_file']['tmp_name'], $target_path)) {
             echo 'File uploaded successfully!';
 
-            $conn = new mysqli('localhost', 'u475858870_root', 'Kalasalingam@339', 'u475858870_quiz');
+            $conn = new mysqli('localhost', 'root', '', 'quiz');
 
             if ($conn->connect_error) {
                 die('Connection Failed: ' . $conn->connect_error);

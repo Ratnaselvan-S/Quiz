@@ -1,11 +1,10 @@
 <?php
 session_start();
-    // Database connection parameters
-
-    $host = "localhost";
-    $dbname = "u475858870_quiz";
-    $username = "u475858870_root";
-    $dbPassword = "Kalasalingam@339";
+// Database connection parameters
+$host = "localhost";
+$dbname = "quiz";
+$username = "root";
+$dbPassword = "";
 
 // Connect to the database
 try {
@@ -17,29 +16,48 @@ try {
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the quiz code from the form
-    $code = $_POST['code'];
+    // Get the quiz title from the form
+    $title = $_POST['title'];
 
     try {
-        // Prepare and execute the SQL query to fetch quiz attendance records for the given code
-        $stmt = $pdo->prepare("SELECT * FROM quiz_attendance WHERE code = ?");
-        $stmt->execute([$code]);
+        // Prepare and execute the SQL query to fetch quiz attendance records for the given title
+        $stmt = $pdo->prepare("SELECT * FROM quiz_attendance WHERE title = ?");
+        $stmt->execute([$title]);
         $quizRecords = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Fetch quiz schedule based on the entered code
-        $stmt = $pdo->prepare("SELECT quiz_date, end_time FROM scheduled_quizzes WHERE code = ?");
-        $stmt->execute([$code]);
+        // Fetch quiz schedule based on the entered title
+        $stmt = $pdo->prepare("SELECT quiz_date, end_time FROM scheduled_quizzes WHERE title = ?");
+        $stmt->execute([$title]);
         $Schedule = $stmt->fetch(PDO::FETCH_ASSOC);
-
 
         // If there are no records found, display an error message
         if (empty($quizRecords)) {
-            $errorMessage = "Invalid code. Please check the code.";
+            $errorMessage = "Invalid title. Please check the title.";
         }
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
 }
+
+// Toggle marks visibility
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['show_marks_to_students'])) {
+    // Fetch the current status
+    $statusStmt = $pdo->prepare("SELECT status FROM quiz_attendance WHERE title = ?");
+    $statusStmt->execute([$title]);
+    $currentStatus = $statusStmt->fetchColumn();
+
+    // Determine the new status
+    $newStatus = ($currentStatus === 'yes') ? 'no' : 'yes';
+
+    // Update the status in the database
+    $updateStmt = $pdo->prepare("UPDATE quiz_attendance SET status = ? WHERE title = ?");
+    $updateStmt->execute([$newStatus, $title]);
+
+    // Reload the page to reflect the change
+    header("Location: " . htmlspecialchars($_SERVER["PHP_SELF"]) . "?title=" . urlencode($title));
+    exit;
+}
+
 // Set the time zone to Indian Standard Time (IST)
 date_default_timezone_set('Asia/Kolkata');
 $showMarksButton = false;
@@ -51,7 +69,34 @@ if (!empty($Schedule)) {
         $showMarksButton = true;
     }
 }
+
+// Function to generate CSV data
+function generateCSVData($data)
+{
+    $csvData = "Email,Name,Register ID,Section,Stream,Title,Marks\n";
+    foreach ($data as $record) {
+        $csvData .= "{$record['email']},{$record['name']},{$record['register']},{$record['section']},{$record['stream']},{$record['title']},{$record['marks']}\n";
+    }
+    return $csvData;
+}
+
+// Handle CSV download
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['download_csv'])) {
+    if (!empty($quizRecords)) {
+        // Generate CSV data
+        $csvData = generateCSVData($quizRecords);
+
+        // Set headers for CSV download
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename=quiz_attendance.csv');
+
+        // Output CSV data
+        echo $csvData;
+        exit; // Stop further execution
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -138,6 +183,11 @@ if (!empty($Schedule)) {
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
+
+        .download-form {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -145,8 +195,8 @@ if (!empty($Schedule)) {
     <div class="container">
         <h2>View Quiz Attendance</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <label for="code">Enter Quiz Code:</label>
-            <input type="text" id="code" name="code">
+            <label for="title">Enter Quiz Title:</label>
+            <input type="text" id="title" name="title">
             <button type="submit">Search</button>
         </form>
 
@@ -155,7 +205,7 @@ if (!empty($Schedule)) {
         <?php endif; ?>
 
         <?php if (!empty($quizRecords)) : ?>
-            <h3>Quiz Attendance Records for Code: <?php echo $code; ?></h3>
+            <h3>Quiz Attendance Records for Title: <?php echo $title; ?></h3>
             <table>
                 <tr>
                     <th>Email</th>
@@ -179,14 +229,19 @@ if (!empty($Schedule)) {
                 <?php endforeach; ?>
             </table>
 
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="download-form">
+                <input type="hidden" name="title" value="<?php echo $title; ?>">
+                <button type="submit" name="download_csv">Download CSV</button>
+            </form>
+
             <?php if ($showMarksButton && !empty($quizRecords)) : ?>
                 <div style="text-align: center; margin-top: 20px;">
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <input type="hidden" name="code" value="<?php echo $code; ?>">
+                        <input type="hidden" name="title" value="<?php echo $title; ?>">
                         <?php
-                        // Fetch current status for the quiz records with the entered code
-                        $statusStmt = $pdo->prepare("SELECT status FROM quiz_attendance WHERE code = ?");
-                        $statusStmt->execute([$code]);
+                        // Fetch current status for the quiz records with the entered title
+                        $statusStmt = $pdo->prepare("SELECT status FROM quiz_attendance WHERE title = ?");
+                        $statusStmt->execute([$title]);
                         $currentStatus = $statusStmt->fetchColumn();
 
                         // Determine the color and text based on the current status
@@ -195,61 +250,11 @@ if (!empty($Schedule)) {
                         ?>
                         <button type="submit" name="show_marks_to_students" style="background-color: <?php echo $statusColor; ?>"><?php echo $statusText; ?></button>
                     </form>
-                    <a href="dashboard.php"><button>Go to Dashboard</button></a>
+                    <a href="dashboard.php"><button style="padding: 8px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Go to Dashboard</button></a>
                 </div>
-            <?php else : ?>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="dashboard.php"><button>Go to Dashboard</button></a>
-                </div>
-
             <?php endif; ?>
         <?php endif; ?>
     </div>
-
-
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['show_marks_to_students'])) {
-        // Get the quiz code from the form
-        $code = $_POST['code'];
-
-        try {
-            // Check the current status for the quiz records with the entered code
-            $statusStmt = $pdo->prepare("SELECT status FROM quiz_attendance WHERE code = ?");
-            $statusStmt->execute([$code]);
-            $currentStatus = $statusStmt->fetchColumn();
-
-            // Toggle the status for the quiz records with the entered code
-            $newStatus = ($currentStatus === 'yes') ? 'no' : 'yes';
-            $updateStmt = $pdo->prepare("UPDATE quiz_attendance SET status = ? WHERE code = ?");
-            $updateStmt->execute([$newStatus, $code]);
-
-            if ($updateStmt->rowCount() > 0) {
-                // If records are updated successfully, show success message
-                $_SESSION['success_message'] = "The changes you made have been applied. To change again, Enter the code and make changes.";
-            } else {
-                // If no records are updated, show error message
-                $_SESSION['error_message'] = "Failed to update status. Please try again.";
-            }
-
-            // Redirect to prevent form resubmission
-            header("Location: {$_SERVER['REQUEST_URI']}");
-            exit;
-        } catch (PDOException $e) {
-            die("Error: " . $e->getMessage());
-        }
-
-        // Display success or error messages
-        if (isset($_SESSION['success_message'])) {
-            echo '<p style="color: green; text-align: center;">' . $_SESSION['success_message'] . '</p>';
-            unset($_SESSION['success_message']); // Clear the success message
-        }
-
-        if (isset($_SESSION['error_message'])) {
-            '<p style="color: red; text-align: center;">' . $_SESSION['error_message'] . '</p>';
-            unset($_SESSION['error_message']); // Clear the error message
-        }
-    }
-    ?>
 </body>
 
 </html>
