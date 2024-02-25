@@ -3,10 +3,11 @@ $token = $_GET["token"];
 
 $token_hash = hash("sha256", $token);
 
-$host = "localhost";
-$dbname = "quiz";
-$username = "root";
-$dbPassword = "";
+                                                    $host = "localhost";
+                                                    $dbname = "u475858870_quiz";
+                                                    $username = "u475858870_root";
+                                                    $dbPassword = "Kalasalingam@339";
+
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);

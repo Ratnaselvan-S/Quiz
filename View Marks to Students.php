@@ -1,9 +1,10 @@
 <?php
-// Database connection parameters
-$host = "localhost";
-$dbname = "quiz";
-$username = "root";
-$dbPassword = "";
+        // Database connection parameters
+        $host = "localhost";
+        $dbname = "u475858870_quiz";
+        $username = "u475858870_root";
+        $dbPassword = "Kalasalingam@339";
+
 
 // Connect to the database
 try {

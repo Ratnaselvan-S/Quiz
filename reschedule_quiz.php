@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$conn = new mysqli('localhost', 'root', '', 'quiz');
+$conn = new mysqli('localhost','u475858870_root','Kalasalingam@339','u475858870_quiz');
 
 if ($conn->connect_error) {
     die('Connection Failed: ' . $conn->connect_error);

@@ -15,9 +15,10 @@ if (isset($_SESSION['user_email'])) {
     // Fetch user information from student_info table
     try {
         $host = "localhost";
-        $dbname = "quiz";
-        $username = "root";
-        $dbPassword = "";
+        $dbname = "u475858870_quiz";
+        $username = "u475858870_root";
+        $dbPassword = "Kalasalingam@339";
+
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

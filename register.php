@@ -8,9 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $activation_token_hash = hash("sha256", $activation_token);
 
     $host = "localhost";
-    $dbname = "quiz";
-    $username = "root";
-    $dbPassword = ""; 
+    $dbname = "u475858870_quiz";
+    $username = "u475858870_root";
+    $dbPassword = "Kalasalingam@339";
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
