@@ -7,4 +7,3 @@ try {
 }
 
 return $pdo;
-?>

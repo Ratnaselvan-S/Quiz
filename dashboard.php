@@ -22,6 +22,7 @@ if (!isset($_SESSION['user_email'])) {
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
     <link rel="stylesheet" href="./dashboard.css">
     <title>DashBoard</title>
 </head>

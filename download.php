@@ -7,6 +7,7 @@ $dbname = "u475858870_quiz";
 $username = "u475858870_root";
 $dbPassword = "Kalasalingam@339";
 
+
 // Connect to the database
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);

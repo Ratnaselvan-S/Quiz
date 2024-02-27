@@ -36,7 +36,7 @@ try {
         $mail->addAddress($email);
         $mail->Subject = "Password Reset";
         $mail->Body = <<<END
-        Click <a href="http://localhost/vijay/reset-password.php?token=$token">here</a> 
+        Click <a href="https://kare-quiz.alphadevsx.com/reset-password.php?token=$token">here</a> 
         to reset your password.
         END;
 

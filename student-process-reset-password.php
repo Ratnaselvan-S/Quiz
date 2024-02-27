@@ -2,11 +2,11 @@
 $token = $_POST["token"];
 $password = $_POST["password"];
 
+
 $host = "localhost";
 $dbname = "u475858870_quiz";
 $username = "u475858870_root";
 $dbPassword = "Kalasalingam@339";
-
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
@@ -18,7 +18,7 @@ try {
             WHERE reset_token_hash = :token_hash";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':token_hash', $token_hash, PDO::PARAM_STR); 
+    $stmt->bindParam(':token_hash', $token_hash, PDO::PARAM_STR);
     $stmt->execute();
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);

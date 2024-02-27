@@ -110,6 +110,8 @@
             margin-top: 20px;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
+
 </head>
 
 <body>

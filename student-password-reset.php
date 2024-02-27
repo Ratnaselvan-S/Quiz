@@ -6,11 +6,11 @@ $token = bin2hex(random_bytes(16));
 $token_hash = hash("sha256", $token);
 $expiry = date("Y-m-d H:i:s", time() + 60 * 30);
 
+
 $host = "localhost";
 $dbname = "u475858870_quiz";
 $username = "u475858870_root";
 $dbPassword = "Kalasalingam@339";
-
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
@@ -37,7 +37,7 @@ try {
         $mail->addAddress($email);
         $mail->Subject = "Password Reset";
         $mail->Body = <<<END
-        Click <a href="http://localhost/vijay/student-reset-password.php?token=$token">here</a> 
+        Click <a href="https://kare-quiz.alphadevsx.com/student-reset-password.php?token=$token">here</a> 
         to reset your password.
         END;
 

@@ -43,7 +43,7 @@ try {
     $update_stmt->bindParam(':email', $user["email"], PDO::PARAM_INT);
     $update_stmt->execute();
 
-    echo "Password updated. You can now <a href='login.html'>login</a>.";
+    echo "Password updated. You can now <a href='index.html'>login</a>.";
 } catch (PDOException $e) {
     die("Error: " . $e->getMessage());
 }

@@ -1,10 +1,10 @@
 <?php
         // Database connection parameters
+
         $host = "localhost";
         $dbname = "u475858870_quiz";
         $username = "u475858870_root";
         $dbPassword = "Kalasalingam@339";
-
 
 // Connect to the database
 try {
@@ -16,6 +16,10 @@ try {
 
 // Start the session to access session variables
 session_start();
+if (!isset($_SESSION['user_email'])) {
+    header("Location: index.html");
+    exit();
+}
 
 $showForm = true; // Variable to control showing the form or the attendance record
 
@@ -139,6 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 10px;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
+
 </head>
 
 <body>

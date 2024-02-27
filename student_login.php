@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $conn = new mysqli('localhost','u475858870_root','Kalasalingam@339','u475858870_quiz');
+    $conn = new mysqli('localhost', 'u475858870_root', 'Kalasalingam@339', 'u475858870_quiz');
 
     if ($conn->connect_error) {
         die('Connection Failed: ' . $conn->connect_error);
@@ -24,12 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $user['password'])) {
                 session_start();
                 $_SESSION['user_email'] = $user['email'];
-                header("Location: student_dashboard.php"); 
+                header("Location: student_dashboard.php");
                 exit();
             } elseif ($password === $user['password']) {
                 session_start();
                 $_SESSION['user_email'] = $user['email'];
-                header("Location: student_dashboard.php"); 
+                header("Location: student_dashboard.php");
                 exit();
             } else {
                 // Password is incorrect
@@ -43,4 +43,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
     }
 }
-?>

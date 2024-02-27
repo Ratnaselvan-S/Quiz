@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->addAddress($email); 
                 $mail->Subject = "Account Activation";
                 $mail->Body = <<<END
-                Click <a href="http://localhost/vijay/activate-account.php?token=$activation_token">here</a> 
+                Click <a href="https://kare-quiz.alphadevsx.com/activate-account.php?token=$activation_token">here</a> 
                 to activate your account.
                 END;
 

@@ -1,11 +1,15 @@
 <?php
 session_start();
-        // Database connection parameters
+// Database connection parameters
+if (!isset($_SESSION['user_email'])) {
+    header("Location: login.html");
+    exit();
+}
+
         $host = "localhost";
         $dbname = "u475858870_quiz";
         $username = "u475858870_root";
         $dbPassword = "Kalasalingam@339";
-
 
 // Connect to the database
 try {
@@ -190,6 +194,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['download_csv'])) {
             margin-top: 20px;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
+
 </head>
 
 <body>

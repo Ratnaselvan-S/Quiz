@@ -1,5 +1,10 @@
 <?php
 session_start(); // Start the session
+if (!isset($_SESSION['user_email'])) {
+    header("Location: index.html");
+    exit();
+}
+
 
 function validateCode($pdo, $code, $email)
 {
@@ -50,11 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $error = "";
 
     try {
+
         $host = "localhost";
         $dbname = "u475858870_quiz";
         $username = "u475858870_root";
         $dbPassword = "Kalasalingam@339";
-
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -140,6 +145,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             window.history.forward();
         }
     </script>
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
+
 </head>
 
 <body>

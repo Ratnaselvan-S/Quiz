@@ -5,6 +5,8 @@
     <title>Forgot Password</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
+
 </head>
 
 <body>

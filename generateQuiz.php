@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_email'])) {
+    header("Location: login.html");
+    exit();
+} ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,6 +123,7 @@
             margin-top: 20px;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
 </head>
 
 <body>

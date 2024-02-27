@@ -14,11 +14,11 @@ if (isset($_SESSION['user_email'])) {
 
     // Fetch user information from student_info table
     try {
+
         $host = "localhost";
         $dbname = "u475858870_quiz";
         $username = "u475858870_root";
         $dbPassword = "Kalasalingam@339";
-
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $dbPassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -51,7 +51,7 @@ if (isset($_SESSION['user_email'])) {
             $_SESSION['quiz_submitted'] = true;
 
             // Redirect to student dashboard after successful recording
-            echo '<script>alert("Your score on the quiz is zero because you cheated.");</script>';
+            echo '<script>alert("Quiz submitted successfully!");</script>';
 
             // Redirect the user to dashboard page after successful quiz attendance recording
             echo '<script>window.location.href = "student_dashboard.php";</script>';

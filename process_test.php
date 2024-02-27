@@ -1,11 +1,9 @@
 <?php
 session_start(); // Start the session
-if (isset($_SESSION['quiz_submitted']) && $_SESSION['quiz_submitted']) {
-    // Redirect to the dashboard or any other page
-    header("Location: student_dashboard.php");
-    exit; // Make sure to exit after the redirect
+if (!isset($_SESSION['user_email'])) {
+    header("Location: login.html");
+    exit();
 }
-
 if (isset($_POST['quizData'])) {
     $quizData = json_decode($_POST['quizData'], true);
 
