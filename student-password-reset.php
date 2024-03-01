@@ -30,7 +30,7 @@ try {
 
     // if ($stmt->rowCount()) {
          echo "ratna";print_r($stmt->rowCount();die;
-        $mail = require __DIR__ . "/mailer.php";
+        // $mail = require __DIR__ . "/mailer.php";
    
         $mail->setFrom("noreply@example.com");
         $mail->addAddress($email);
