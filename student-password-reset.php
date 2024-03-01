@@ -35,13 +35,14 @@ try {
         $mail->setFrom("noreply@example.com");
         $mail->addAddress($email);
         $mail->Subject = "Password Reset";
-        $mail->Body = <<<END
-        Click <a href="https://kare-quiz.alphadevsx.com/student-reset-password.php?token=$token">here</a> 
-        to reset your password.
-        END;
+        // $mail->Body = <<<END
+        // Click <a href="https://kare-quiz.alphadevsx.com/student-reset-password.php?token=$token">here</a> 
+        // to reset your password.
+        // END;
         $mail->Body = '<p><a href="https://kare-quiz.alphadevsx.com/student-reset-password.php?token=$token">here</a>to reset your password.</p>';
         try {
             $mail->send();
+             echo "Message sent, please check your inbox.";
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
         }
