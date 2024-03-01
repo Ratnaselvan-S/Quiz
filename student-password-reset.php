@@ -28,7 +28,7 @@ try {
 
     $stmt->execute();
 
-    // if ($stmt->rowCount()) {
+    if ($stmt->rowCount()) {
          echo "ratna";print_r($stmt->rowCount());die;
         // $mail = require __DIR__ . "/mailer.php";
    
@@ -45,7 +45,7 @@ try {
         // } catch (Exception $e) {
         //     echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
         // }
-    // }
+    }
 
     echo "Message sent, please check your inbox.";
 } catch (PDOException $e) {
