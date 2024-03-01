@@ -29,7 +29,8 @@ try {
     $stmt->execute();
 
     if ($stmt->rowCount()) {
-        $mail = require __DIR__ . "/mailer.php";
+        // $mail = require __DIR__ . "/mailer.php";
+        $mail = "./mailer.php";
         $mail->setFrom("noreply@example.com");
         $mail->addAddress($email);
         $mail->Subject = "Password Reset";
