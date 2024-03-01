@@ -15,7 +15,7 @@
 
     <form method="post" action="student-password-reset.php">
 
-        <label for="email">Email</label>
+        <label for="email">Emails</label>
         <input type="email" name="email" id="email" required>
 
         <button type="submit">Send</button>
