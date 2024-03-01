@@ -29,22 +29,22 @@ try {
     $stmt->execute();
 
     // if ($stmt->rowCount()) {
-         echo "ratna";print_r($stmt->rowCount();die;
+         echo "ratna";print_r($stmt->rowCount());die;
         // $mail = require __DIR__ . "/mailer.php";
    
-        $mail->setFrom("noreply@example.com");
-        $mail->addAddress($email);
-        $mail->Subject = "Password Reset";
+        // $mail->setFrom("noreply@example.com");
+        // $mail->addAddress($email);
+        // $mail->Subject = "Password Reset";
         // $mail->Body = <<<END
         // Click <a href="https://kare-quiz.alphadevsx.com/student-reset-password.php?token=$token">here</a> 
         // to reset your password.
         // END;
-        $mail->Body = '<p><a href="https://kare-quiz.alphadevsx.com/student-reset-password.php?token=$token">here</a>to reset your password.</p>';
-        try {
-            $mail->send();
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
-        }
+        // $mail->Body = '<p><a href="https://kare-quiz.alphadevsx.com/student-reset-password.php?token=$token">here</a>to reset your password.</p>';
+        // try {
+        //     $mail->send();
+        // } catch (Exception $e) {
+        //     echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
+        // }
     // }
 
     echo "Message sent, please check your inbox.";
