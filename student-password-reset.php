@@ -31,7 +31,6 @@ try {
     if ($stmt->rowCount()) {
         echo "ratna";print_r($stmt->rowCount());
         $mail = require __DIR__ . "/mailer.php";
-        echo "ratna1";print_r($mail);
         $mail->setFrom("noreply@example.com");
         $mail->addAddress($email);
         $mail->Subject = "Password Reset";
