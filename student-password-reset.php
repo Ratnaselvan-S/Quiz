@@ -29,7 +29,6 @@ try {
     $stmt->execute();
 
     if ($stmt->rowCount()) {
-        echo "ratna";print_r($stmt->rowCount());
         $mail = require __DIR__ . "/mailer.php";
         $mail->setFrom("noreply@example.com");
         $mail->addAddress($email);
@@ -39,13 +38,14 @@ try {
         // to reset your password.
         // END;
         $mail->Body = '<p><a href="https://kare-quiz.alphadevsx.com/student-reset-password.php?token=$token">here</a>to reset your password.</p>';
-        try {
-            $mail->send();
-            echo "ratna2";print_r($mail->send());
-            echo "Message sent, please check your inbox.";
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
-        }
+        $mail->send();
+        // try {
+        //     $mail->send();
+        //     echo "ratna2";print_r($mail->send());
+        //     echo "Message sent, please check your inbox.";
+        // } catch (Exception $e) {
+        //     echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
+        // }
     }
 
     echo "Message sent, please check your inbox.";
